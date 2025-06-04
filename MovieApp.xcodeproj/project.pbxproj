@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2725EDDD2DEEA06700AC56C8 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 2725EDDC2DEEA06700AC56C8 /* Alamofire */; };
+		276E7A022DF08E3A002D4619 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 276E7A012DF08E3A002D4619 /* Kingfisher */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -40,6 +41,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				276E7A022DF08E3A002D4619 /* Kingfisher in Frameworks */,
 				2725EDDD2DEEA06700AC56C8 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -85,6 +87,7 @@
 			name = MovieApp;
 			packageProductDependencies = (
 				2725EDDC2DEEA06700AC56C8 /* Alamofire */,
+				276E7A012DF08E3A002D4619 /* Kingfisher */,
 			);
 			productName = MovieApp;
 			productReference = 2725EDC82DEE91F200AC56C8 /* MovieApp.app */;
@@ -116,6 +119,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				2725EDDB2DEEA06700AC56C8 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				276E7A002DF08E3A002D4619 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 2725EDC92DEE91F200AC56C8 /* Products */;
@@ -281,6 +285,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -308,6 +313,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -353,6 +359,14 @@
 				minimumVersion = 5.10.2;
 			};
 		};
+		276E7A002DF08E3A002D4619 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.3.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -360,6 +374,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2725EDDB2DEEA06700AC56C8 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		276E7A012DF08E3A002D4619 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 276E7A002DF08E3A002D4619 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

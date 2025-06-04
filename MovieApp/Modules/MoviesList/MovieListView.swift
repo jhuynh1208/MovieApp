@@ -7,6 +7,7 @@
 
 
 import SwiftUI
+import Kingfisher
 
 struct MovieListView: View {
     @StateObject private var viewModel = MovieListViewModel()
@@ -14,24 +15,20 @@ struct MovieListView: View {
     
     var body: some View {
         NavigationView {
-            Group {
-                if viewModel.isLoading {
-                    ProgressView("Loading...")
-                } else if !viewModel.filteredMovies.isEmpty {
+            BaseView<MovieListViewModel, _>(title: "Popular Movies", viewModel: viewModel) { vm in
+                if !vm.filteredMovies.isEmpty {
                     moviesList
                 } else {
-                    if !viewModel.searchText.isEmpty {
-                        Text("Movie with title '\(viewModel.searchText)' not found")
+                    if !vm.searchText.isEmpty {
+                        Text("Movie with title '\(vm.searchText)' not found")
                     } else {
-                        EmptyView(message: viewModel.errorMessage) {
-                            viewModel.fetchMovies(context: context)
+                        ErrorView(message: vm.errorMessage) {
+                            vm.fetchMovies(context: context)
                         }
                     }
                 }
             }
-            .navigationTitle("Popular Movies")
-            .navigationBarTitleDisplayMode(.inline)
-            .searchable(text: $viewModel.searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search by title")
+            .searchable(text: $viewModel.searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search movies by title")
             .onAppear {
                 viewModel.fetchMovies(context: context)
             }
@@ -45,13 +42,14 @@ extension MovieListView {
     private func movieRow(_ movie: Movie) -> some View {
         HStack {
             if let posterURL = movie.posterURL {
-                AsyncImage(url: posterURL) { image in
-                    image.resizable()
-                } placeholder: {
-                    ImagePlaceholder()
-                }
-                .frame(width: 50, height: 75)
-                .cornerRadius(8)
+                KFImage(posterURL)
+                    .placeholder { ImagePlaceholder() }
+                    .targetCache(ImageCache(name: movie.title))
+                    .cacheOriginalImage()
+                    .fade(duration: 0.3)
+                    .resizable()
+                    .frame(width: 50, height: 75)
+                    .cornerRadius(8)
             } else {
                 ImagePlaceholder()
                     .frame(width: 50, height: 75)
