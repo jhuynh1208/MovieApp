@@ -10,6 +10,7 @@ import SwiftUI
 @main
 struct MovieAppApp: App {
     let persistentContainer = CoreDataManager.shared.container
+    
     var body: some Scene {
         WindowGroup {
             MovieListView()

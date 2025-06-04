@@ -7,6 +7,7 @@
 
 
 import SwiftUI
+import Kingfisher
 
 struct MovieDetailView: View {
     @StateObject private var viewModel = MovieDetailViewModel()
@@ -14,18 +15,15 @@ struct MovieDetailView: View {
     let movieID: Int
     
     var body: some View {
-        Group {
-            if let movie = viewModel.movie {
+        BaseView<MovieDetailViewModel, _>(title: "Details", viewModel: viewModel, content: { vm in
+            if let movie = vm.movie {
                 movieDetails(of: movie)
-            } else if viewModel.isLoading {
-                ProgressView("Loading...")
             } else {
-                EmptyView(message: viewModel.errorMessage) {
-                    viewModel.fetchMovieDetail(id: movieID, context: context)
+                ErrorView(message: vm.errorMessage) {
+                    vm.fetchMovieDetail(id: movieID, context: context)
                 }
             }
-        }
-        .navigationTitle("Details")
+        })
         .onAppear {
             viewModel.fetchMovieDetail(id: movieID, context: context)
         }
@@ -38,17 +36,17 @@ extension MovieDetailView {
     private func movieDetails(of movie: Movie) -> some View {
          ScrollView {
              VStack(alignment: .leading) {
-                 if let url = movie.posterURL {
-                     AsyncImage(url: url) { image in
-                         image
-                             .resizable()
-                             .scaledToFit()
-                     } placeholder: {
-                         ImagePlaceholder()
-                     }
-                     .frame(height: 300)
-                     .frame(maxWidth: .infinity)
-                     .clipped()
+                 if let posterURL = movie.posterURL {
+                     KFImage(posterURL)
+                         .placeholder { ImagePlaceholder() }
+                         .targetCache(ImageCache(name: movie.title))
+                         .cacheOriginalImage()
+                         .fade(duration: 0.3)
+                         .resizable()
+                         .scaledToFit()
+                         .frame(height: 300)
+                         .frame(maxWidth: .infinity)
+                         .clipped()
                  } else {
                      ImagePlaceholder()
                          .frame(height: 300)
